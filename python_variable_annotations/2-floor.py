@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+"""takes a float n return the floor of the float"""
+import math
+
+
+def floor(n: float) -> int:
+    """takes a float n return the floor of the float"""
+    return math.floor(n)
