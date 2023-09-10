@@ -13,7 +13,7 @@ class Server:
     def __init__(self):
         self.__dataset = None
 
-    def index_range(page: int, page_size: int) -> Tuple:
+    def index_range(iself, page: int, page_size: int) -> Tuple:
         """function that takes 2 integers"""
         a: int = page_size * page - page_size
         return (a, page_size * page)
@@ -27,15 +27,15 @@ class Server:
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
 
-            return self.__dataset
+        return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """takes two integer arguments page and page_size"""
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
-        with open(self.DATA_FILE, "x") as f:
+        with open(self.DATA_FILE, "r") as f:
             reader = csv.reader(f)
             data = list(reader)
-            star, ends = self.index_range(page, page_size)
-            page_data = data[star+1:ends+1]
+            start, end = self.index_range(page, page_size)
+            page_data = data[start+1:end+1]
             return page_data
