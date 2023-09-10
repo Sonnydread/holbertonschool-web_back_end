@@ -37,19 +37,31 @@ class Server:
             reader = csv.reader(f)
             datos = list(reader)
             start, end = self.index_range(page, page_size)
-            page_data = data[start+1:end+1]
+            page_data = datos[start+1:end+1]
         return page_data
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """returns a dictionary containing the following key-value pairs"""
-        total_pages = len(self.dataset()) // page_size + 1
-        data = self.get_page(page, page_size)
-        di = {
-              "page_size": page_size if page_size <= len(info) else len(info),
+        info = self.get_page(page, page_size)
+        with open(self.DATA_FILE, "r") as f:
+            reader = csv.reader(f)
+            datos = list(reader)
+        total = len(self.dataset())
+        aprox = self.index_range(page, page_size)
+        if aprox[1] > total:
+            nex_page = None
+        else:
+            nex_page = page + 1
+        if page == 1:
+            prev_page = None
+        else:
+            prev_page = page - 1
+        di_c = {
+              "page_size": len(info),
               "page": page,
-              "data": data,
-              "total_pages": total_pages,
-              "next_page": page + 1 if page + 1 <= total_pages else None,
-              "prev_page": page - 1 if page > 1 else None
-        }
-        return di
+              "data": info,
+              "total_pages": math.ceil(total / page_size),
+              "next_page": nex_page,
+              "prev_page": prev_page
+              }
+        return di_c
