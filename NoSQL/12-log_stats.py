@@ -17,5 +17,4 @@ if __name__ == "__main__":
 
         mns = "status check"
 
-        print(f"{col.count_documents({'method': 'GET',
-                                      'path': '/status'})} {mns}")
+        print(f"{col.count_documents({'method': 'GET','path': '/status'})} {mns}")
