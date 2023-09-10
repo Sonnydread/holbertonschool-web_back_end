@@ -44,18 +44,7 @@ class Server:
         """returns a dictionary containing the following key-value pairs"""
         info = self.get_page(page, page_size)
         with open(self.DATA_FILE, "r") as f:
-            reader = csv.reader(f)
-            datos = list(reader)
-        total = len(self.dataset())
-        aprox = self.index_range(page, page_size)
-        if aprox[1] > total:
-            nex_page = None
-        else:
-            nex_page = page + 1
-        if page == 1:
-            prev_page = None
-        else:
-            prev_page = page - 1
+        
         di_c = {
               "page_size": len(info),
               "page": page,
