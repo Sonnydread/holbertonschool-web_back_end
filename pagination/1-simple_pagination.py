@@ -33,6 +33,9 @@ class Server:
         """takes two integer arguments page and page_size"""
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
-        
+        with open(self.DATA_FILE, "r") as f:
+            reader = csv.reader(f)
+            data = list(reader)
+            start, end = self.index_range(page, page_size)
             page_data = data[start+1:end+1]
             return page_data
