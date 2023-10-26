@@ -56,7 +56,7 @@ class Server:
             prev_page = None
         else:
             prev_page = page - 1
-      
+
         di_c = {
               "page_size": len(info),
               "page": page,
