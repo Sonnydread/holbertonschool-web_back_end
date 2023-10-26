@@ -42,8 +42,8 @@ class Server:
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """get_hyper_index method with two integer"""
         assert index < page_size + index and index < len(self.dataset())
-          info = self.indexed_dataset()
-          items = [info[i] if info.get(i) else info[i + 1]
+            info = self.indexed_dataset()
+            items = [info[i] if info.get(i) else info[i + 1]
                   for i in range(index, index + page_size)]
         di_c = {
                     "index": index,
